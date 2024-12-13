@@ -25,6 +25,42 @@ procedure leerVentas();
 //Se dispone
 procedure generarVentas(var L: listaVentas);
 
+
+
+procedure agAdelante(var l: listaV; d: venta);
+ var nue: listaV;
+ begin
+	new(nue);
+	nue^.dato:= d;
+	nue^.sig:= l;
+	l:= nue;
+ end;
+ 
+procedure agAtras(var l: listaV; d: venta);
+ var nue, aux: listaV;
+ begin
+	new(nue);
+	nue^.dato:= d;
+	nue^.sig:= NIL;
+	//Si la lista esta vacia, nue es el puntero inicial
+	if (l = NIL) then l:= nue;
+	else begin //sino, recorro hasta el final y ahí agrego a nue.
+		aux:= l; //utilizo puntero auxiliar para no perder el puntero inicial de la lista
+		while (aux <> NIL) do aux:= aux^.sig;
+		
+		aux^.sig:= nue;
+	end;
+ end;
+ 
+ 
+procedure evaluar(ok: boolean; dato: venta; var lis2: listaV);
+ begin
+	if (ok = true) then begin
+		if (dato.pago = 'Tarjeta') then agAdelante(lis2, dato)
+		else agAtras(lis2, dato);
+	end;
+ end; 
+
 function descomponer(n: integer):boolean;
  var dig, pares: integer; validacion: boolean;
  begin
@@ -39,20 +75,16 @@ function descomponer(n: integer):boolean;
 	if (pares = 2) then
 		validacion:= true
 	else validacion:= false;
+	
 	descomponer:= validacion;
  end;
-
-procedure agregar
 
 procedure recorrer(l: listaVentas; var l2: listaV);
  var ok: boolean;
  begin
 	while (lis <> NIL) do begin
 		ok:= descomponer(lis^.dato.cantP); //devuelve si el num tiene al menos 2 digitos pares
-		if (ok = true) then begin
-			if (lis^.dato.pago = 'Tarjeta') then agAdelante(l2, lis^.dato)
-			else agFinal(l2, lis^.dato);
-		end;
+		evaluar(ok, l^.dato, l2);
 		lis:= lis^.sig;
 	end;
  end;
