@@ -1,0 +1,77 @@
+{
+3. El Ministerio de Educación desea realizar un relevamiento de las 2400 escuelas primarias de la provincia de Bs. As,
+con el objetivo de evaluar si se cumple la proporción de alumnos por docente calculada por la UNESCO para el año
+2015 (1 docente cada 23,435 alumnos). Para ello, se cuenta con información de: CUE (código único de establecimiento), 
+nombre del establecimiento, cantidad de docentes, cantidad de alumnos, localidad. Se pide implementar un programa que 
+procese la información y determine:
+
+● Cantidad de escuelas de La Plata con una relación de alumnos por docente superior a la sugerida por UNESCO.
+● CUE y nombre de las dos escuelas con mejor relación entre docentes y alumnos.
+
+El programa debe utilizar:
+a) Un módulo para la lectura de la información de la escuela.
+b) Un módulo para determinar la relación docente-alumno (esa relación se obtiene del cociente entre la cantidad de alumnos y la cantidad de docentes).
+}
+
+
+program escuelas;
+
+type
+	establecimiento = record
+		codigoUnico : integer;
+		nombre : string;
+		cantDocentes : integer;
+		cantAlum : integer;
+		localidad : string;
+	end;
+
+procedure leerEstablecimientos(var lugar:establecimiento);
+ begin
+	writeln('Ingrese el CUE del establecimiento: ');
+	readln(lugar.codigoUnico);
+	writeln('Ingrese el NOMBRE del establecimiento: ');
+	readln(lugar.nombre);
+	writeln('Ingrese la CANTIDAD de DOCENTES del establecimiento: ');
+	readln(lugar.cantDocentes);
+	writeln('Ingrese la CANTIDAD de ALUMNOS del establecimiento: ');
+	readln(lugar.cantAlum);
+	writeln('Ingrese la LOCALIDAD del establecimiento: ');
+	readln(lugar.localidad);
+ end; 
+ 
+function evaluarPropor(alumnos, docentes: integer):real;
+begin
+	evaluarPropor:= (alumnos / docentes);
+end;
+
+var
+	registro: establecimiento;
+	nombreMejor1, nombreMejor2 : string;
+	
+	i, cantUnesco, min1, min2, cue1, cue2: integer;
+BEGIN
+	min1:= 99999;
+	cantUnesco:= 0;
+	for i:= 1 to 2400 do begin {2400 escuelas}
+		leerEstablecimientos(registro);
+		{Evaluar la proporción en La Plata}
+		if (registro.localidad = 'La Plata') and (evaluarPropor(registro.cantAlum, registro.cantDocentes) > 23.435) then begin
+			cantUnesco:= cantUnesco + 1;
+		end;
+		E
+		{Evaluar mejor relacion de alumnos por docentes}
+		if (min1 < evaluarPropor(registro.cantAlum, registro.cantDocentes)) then begin
+			min2 := min1;
+			min1 := evaluarPropor;
+			cue2 := cue1;
+			cue1 := registro.codigoUnico;
+				
+			{falta determinar 2 mejores minimos y almacenar sus nombres y cue}
+			
+		end;
+	end; 
+	writeln('La cantidad de ESTABLECIMIENTOS de La Plata con una relacion de alumnos por docentes superior a la sugerida por UNESCO es: ', cantUnesco);
+	writeln('Las 2 escuelas con mejor relación son:  ', nombreMejor1, ' CUE: ', cue1);
+	writeln(nombreMejor2, ' CUE: ', cue2);
+END.
+
