@@ -56,8 +56,8 @@ procedure agAtras(var l: listaV; d: venta);
 procedure evaluar(ok: boolean; dato: venta; var lis2: listaV);
  begin
 	if (ok = true) then begin
-		if (dato.pago = 'Tarjeta') then agAdelante(lis2, dato)
-		else agAtras(lis2, dato);
+		if (dato.pago = 'Tarjeta') then agAdelante(lis2, dato) //Si el pago de la venta se hizo con tarjeta, va primero en mi lista
+		else agAtras(lis2, dato); //Sino, va al final.
 	end;
  end; 
 

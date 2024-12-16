@@ -1,0 +1,4 @@
+4- Las formas de comunicación entre módulos son por parámetros y por variables globales.
+ Los parámetros pueden ser utilizados por un único módulo el cuál los recibe, no todos tienen acceso a ellos. En cambio, las variables globales tienen alcance para cualquiera de los módulos declarados en el programa.
+ Las Variables Globales son aquellas que se declaran como una constante donde su valor puede verse afectado por cualquier módulo durante la ejecución del programa.
+ Los parámetros pueden ser tanto por referencia como por valor. Aquellos que son por referencia reciben la dirección de memoria donde esta almacenado el dato con el que se va a trabajar. Este puede ser modificado sin alterar la dirección de memoria. Aquellos que son por valor únicamente reciben una “copia” del valor del dato. Puede modificarse dentro del módulo pero al salir del mismo el valor seguirá siendo el que en principió se encontraba en la dirección de memoria del parámetro.
